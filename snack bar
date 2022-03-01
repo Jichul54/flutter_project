@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Snack Bar',
+      home: Home(),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Snack Bar'),
+        backgroundColor: Colors.red,
+      ),
+      body: Center(
+        //https://zenn.dev/captain_blue/articles/flutter-apply-style-textbutton
+        child: TextButton(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.redAccent)),
+          //https://kikuragechan.com/flutter/snackbar#%E9%9D%9E%E6%8E%A8%E5%A5%A8%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9
+          onPressed: () {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text('Hello')));
+          },
+          child: Text(
+            'Show me',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+}
