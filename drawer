@@ -1,0 +1,114 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'AppBar',
+      debugShowCheckedModeBanner: false,
+      home: MyHome(),
+    );
+  }
+}
+
+class MyHome extends StatelessWidget {
+  const MyHome({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Appbar icon menu'),
+        backgroundColor: Colors.red,
+        elevation: 0.0,
+        actions: <Widget>[
+          IconButton(onPressed: (){
+            print('Shopping cart button was clicked');
+          },
+              icon: Icon(Icons.shopping_cart)),
+          IconButton(onPressed: (){
+            print('Search button was clicked');
+          },
+              icon: Icon(Icons.search)),
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage(
+                    'assets/avatar.jpg'
+                ),
+              ),
+              otherAccountsPictures: <Widget>[
+                CircleAvatar(
+                  backgroundImage: AssetImage(
+                    'asset/user.png'
+                  ),
+                )
+              ],
+              accountName: Text('Jichul Kim'),
+              accountEmail: Text('kjc778869@gmail.com'),
+              onDetailsPressed:(){
+                print('arrow is clicked');
+              },
+              decoration: BoxDecoration(
+                color: Colors.red[200],
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(40.0),
+                  bottomRight: Radius.circular(40.0),
+                )
+              ),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.home
+              ),
+              title: Text(
+                  'Home'),
+              trailing: Icon(
+                Icons.more_vert
+              ),
+              onTap: (){
+                print('Home was clicked');
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                  Icons.settings
+              ),
+              title: Text(
+                  'Setting'),
+              trailing: Icon(
+                  Icons.more_vert
+              ),
+              onTap: (){
+                print('Setting was clicked');
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                  Icons.question_answer
+              ),
+              title: Text(
+                  'Q&A'),
+              trailing: Icon(
+                  Icons.more_vert
+              ),
+              onTap: (){
+                print('Q&A was clicked');
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
