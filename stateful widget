@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+int count = 0;
+
+//https://flutternyumon.com/flutter-statelesswidget-vs-statefulwidget/#statefulwidget%E3%81%AE%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E4%BD%BF%E3%81%84%E6%96%B9
+//https://qiita.com/leedohyung-dba/items/79e0d94dc2943d8e220f
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('You have pushed the button this times.'),
+              Text(
+                '$count',
+                style: TextStyle(fontSize: 30.0),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FloatingActionButton(
+                      child: Icon(Icons.add),
+                      onPressed: () {
+                      //VERY IMPORTANT
+                        setState(() {
+                          count++;
+                          print(count);
+                        });
+                      }),
+                  SizedBox(
+                    width: 20.0,
+                    height: 80.0,
+                  ),
+                  FloatingActionButton(
+                      child: Icon(Icons.remove),
+                      onPressed: () {
+                        setState(() {
+                          count--;
+                          print(count);
+                        });
+                      }),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
