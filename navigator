@@ -25,6 +25,7 @@ class FirstPage extends StatelessWidget {
       ),
       body: Center(
         child: ElevatedButton(
+        //can you explain this?
           onPressed: (){
             Navigator.push(
               context,
