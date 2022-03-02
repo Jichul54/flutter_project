@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Container',
+      home: MyHome(),
+    );
+  }
+}
+
+class MyHome extends StatelessWidget {
+  const MyHome({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        //https://dev-yakuza.posstree.com/ko/flutter/widget/image/
+        child: Image(
+          image: AssetImage('assets/avatar.jpg'),
+        ),
+        alignment: Alignment.center,
+        margin: EdgeInsets.all(100),
+      ),
+    );
+  }
+}
