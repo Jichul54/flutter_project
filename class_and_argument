@@ -1,0 +1,30 @@
+class Person{
+  String name;
+  int age;
+  String sex;
+
+  //생성자(Argument)
+  Person(String name, int age, String sex){
+
+    //생성자에 넣은 값을 Persom class의 값에 넣어라
+    this.name = name;
+    this.age = age;
+    this.sex = sex;
+  }
+}
+
+void main(){
+  //instance 생성
+  Person p1 = new Person('Tom', 30 , 'male');
+}
+
+//만약 Argument의 갯수가 너무 많아서 다 일일이 설정하기가 번거롭다면? Named Argument사용
+Person({String name, int age, String sex}){
+
+  //생성자에 넣은 값을 Persom class의 값에 넣어라
+  this.name = name;
+  this.age = age;
+  this.sex = sex;
+}
+
+Person p2 = new Person(name: 'Jane');
