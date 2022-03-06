@@ -1,0 +1,128 @@
+import 'package:flutter/material.dart';
+import 'package:flutterproject2/dice.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Log in',
+        home: FirstPage()
+    );
+  }
+}
+
+
+class FirstPage extends StatefulWidget {
+  const FirstPage({Key? key}) : super(key: key);
+
+  @override
+  State<FirstPage> createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+
+  final DiceController = TextEditingController();
+  final PasswordController = TextEditingController();
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        leading: Icon(Icons.menu),
+        centerTitle: true,
+        title: Text('Log in'),
+        actions: <Widget>[Icon(Icons.search)],
+      ),
+
+      //builder 위젯이 없음
+      body: GestureDetector(
+        onTap: (){
+          //FocusScope.of(context).unfocus(); 차이점은?
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(70.0),
+                  //container가 아니라 image위젯만으로 크기 조정가능
+                  child: Container(
+                    height: 120.0,
+                    width: 120.0,
+                    child: Image(
+                        image: AssetImage(
+                          'assets/user.png',
+                        )),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 0.0),
+                  child: TextFormField(
+                    controller: DiceController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      labelText: 'Enter "dice"',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 30.0),
+                  child: TextFormField(
+                    controller: PasswordController,
+                    decoration: InputDecoration(
+                      labelText: 'Enter Password',
+                    ),
+                    obscureText: true,
+                  ),
+                ),
+                ButtonTheme(
+                  height: 140.0,
+                  minWidth: 140.0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      print(DiceController.text);
+                      print(PasswordController.text);
+                      if (DiceController.text == 'dice' &&
+                          PasswordController.text == '1234') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const SecondPage()),
+                        );
+                        print(DiceController.text);
+                      } else if (DiceController.text != 'dice' &&
+                          PasswordController.text == '1234') {
+                        final snackBar = SnackBar(
+                            content: const Text('dice의 철자가 틀렸습니다.'),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      } else if (DiceController.text == 'dice' &&
+                          PasswordController.text != '1234') {
+                        final snackBar = SnackBar(
+                          content: const Text('비밀번호가 틀렸습니다.'),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      } else
+                            {
+                              final snackBar = SnackBar(
+                                content: const Text('정보가 틀렸습니다.'),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            };
+                    },
+                    child: Icon(Icons.arrow_forward),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
