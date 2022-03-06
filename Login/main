@@ -1,0 +1,79 @@
+import 'package:flutter/material.dart';
+import 'dart:math';
+import 'package:fluttertoast/fluttertoast.dart';
+
+//runApp안에 무슨 위젯을 넣어야 하는지?
+void main() => runApp(SecondPage());
+
+class SecondPage extends StatefulWidget {
+  const SecondPage({Key? key}) : super(key: key);
+
+  @override
+  State<SecondPage> createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> {
+  int leftDice = Random().nextInt(6) + 1;
+  int rightDice = Random().nextInt(6) + 1;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.redAccent,
+      appBar: AppBar(
+        backgroundColor: Colors.redAccent,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
+        title: Text('Dice game'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  'assets/dice${leftDice}.png',
+                  //중복을 피할순 없나?
+                  width: 150.0,
+                  height: 150.0,
+                ),
+                SizedBox(width: 30.0),
+                Image.asset(
+                  'assets/dice${rightDice}.png',
+                  width: 150.0,
+                  height: 150.0,
+                )
+              ],
+            ),
+            SizedBox(height: 60),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  minimumSize: Size(120, 60), primary: Colors.orange),
+              onPressed: () {
+                setState(() {
+                  leftDice = Random().nextInt(6) + 1;
+                  rightDice = Random().nextInt(6) + 1;
+                  Fluttertoast.showToast(
+                      msg:
+                          'LeftDice = ${leftDice} and RightDice = ${rightDice}',
+                  backgroundColor: Colors.grey[300],
+                  textColor: Colors.black);
+                });
+              },
+              child: Icon(
+                Icons.play_arrow,
+                size: 50,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
